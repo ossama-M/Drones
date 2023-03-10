@@ -38,7 +38,7 @@ public class MedicationOrder {
     @Column(name = "distance_km", columnDefinition = "VARCHAR(10) NOT NULL")
     private double distanceKM;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "drown_id")
     private Drone drone;
 
