@@ -13,7 +13,7 @@ import com.Alzain.Drones.model.MedicationOrder;
 import com.Alzain.Drones.repo.DroneRepo;
 import com.Alzain.Drones.repo.MedicationOrderRepo;
 import com.Alzain.Drones.repo.MedicationRepo;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -114,8 +114,10 @@ import java.util.UUID;
         Drone drone = droneRepo.findDroneBySerial(serial);
         medicationOrder.setDrone(drone);
         medicationOrder.setMedicationList(medicationList);
+        drone.setState(DroneState.LOADING);
+        drone.setMedicationOrder(medicationOrder);
         medicationOrderRepo.save(medicationOrder);
-        droneRepo.updateStateAndOrderNumber(medicationOrder.getId(),DroneState.LOADING,serial);
+
         OrderResponse response  = OrderResponse.builder()
                 .medicationItemRequests(orderRequest.getMedicationItemRequests())
                 .droneSerial(serial)
@@ -145,6 +147,10 @@ import java.util.UUID;
                 medications.stream().map(medication -> mapToItem(medication)).toList();
         orderResponse.setMedicationItemRequests(medicationItemRequests);
         return orderResponse;
+    }
+
+    public List<Drone>findAvailableDrone(){
+        return droneRepo.findAllByStateAndAndBattery();
     }
     private Medication mapToMedication(MedicationItemRequest medicationItemRequest,
                                        MedicationOrder medicationOrder)  throws Exception{

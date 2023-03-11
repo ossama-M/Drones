@@ -14,8 +14,8 @@ public class OrderController {
     public OrderController(DroneService droneService) {
         this.droneService = droneService;
     }
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public OrderResponse PlaceOrder(@RequestBody OrderRequest orderRequest) throws Exception {
         return droneService.placeOrder(orderRequest);
     }
