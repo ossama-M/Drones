@@ -5,6 +5,7 @@ import com.Alzain.Drones.dto.request.AddMedication;
 import com.Alzain.Drones.dto.request.MedicationItemRequest;
 import com.Alzain.Drones.dto.request.OrderRequest;
 import com.Alzain.Drones.dto.response.AddDroneResponse;
+import com.Alzain.Drones.dto.response.DroneBattery;
 import com.Alzain.Drones.dto.response.OrderResponse;
 import com.Alzain.Drones.model.Drone;
 import com.Alzain.Drones.model.DroneState;
@@ -150,8 +151,14 @@ import java.util.UUID;
     }
 
     public List<Drone>findAvailableDrone(){
-        return droneRepo.findAllByStateAndAndBattery();
+        return droneRepo.findAllByStateAndBattery();
     }
+
+    @Override
+    public String findBatteryLevel(String serial) {
+        return droneRepo.findBySerialNumber( serial);
+    }
+
     private Medication mapToMedication(MedicationItemRequest medicationItemRequest,
                                        MedicationOrder medicationOrder)  throws Exception{
         if(!checkNameAndCode(medicationItemRequest.getName(), medicationItemRequest.getCode()))

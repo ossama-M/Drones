@@ -2,6 +2,7 @@ package com.Alzain.Drones.controller;
 
 import com.Alzain.Drones.dto.request.AddDroneRequest;
 import com.Alzain.Drones.dto.response.AddDroneResponse;
+import com.Alzain.Drones.dto.response.DroneBattery;
 import com.Alzain.Drones.dto.response.OrderResponse;
 import com.Alzain.Drones.model.Drone;
 import com.Alzain.Drones.service.DroneService;
@@ -41,6 +42,12 @@ public class DroneController {
     @ResponseStatus(HttpStatus.OK)
     public List<Drone> findAvailableDrone(){
         return droneService.findAvailableDrone();
+    }
+
+    @GetMapping("/battery/{serial}")
+    @ResponseStatus(HttpStatus.OK)
+    public String findBatteryLevel(@Param("serial") String serial){
+        return droneService.findBatteryLevel(serial);
     }
 
 }
