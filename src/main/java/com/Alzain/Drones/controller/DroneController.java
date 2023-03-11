@@ -38,7 +38,7 @@ public class DroneController {
     public OrderResponse getOrderByDroneSerial(@Param("serial") String serial){
         return droneService.checkLoadedItemFroDrone(serial);
     }
-    @GetMapping("/All")
+    @GetMapping("/Available")
     @ResponseStatus(HttpStatus.OK)
     public List<Drone> findAvailableDrone(){
         return droneService.findAvailableDrone();

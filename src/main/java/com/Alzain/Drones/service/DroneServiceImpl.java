@@ -137,6 +137,8 @@ import java.util.UUID;
         List<Medication> medications = medicationRepo.findByOrderNumber(orderNumber) ;
 
         MedicationOrder medicationOrder = medicationOrderRepo.findById(orderNumber);
+        if(Objects.isNull(medicationOrder))
+            return new OrderResponse( );
         OrderResponse orderResponse = OrderResponse.builder()
                 .orderTime(medicationOrder.getOrderTime())
                 .droneSerial(serial)
