@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ErrorController {
     @ExceptionHandler
-    public ResponseEntity<ErrorModel> handleExcption(RuntimeException ex){
+    public ResponseEntity<ErrorModel> handleExcption(Exception ex){
         ErrorModel error = new ErrorModel().builder()
                 .message(ex.getMessage())
                 .status(HttpStatus.FORBIDDEN.value())

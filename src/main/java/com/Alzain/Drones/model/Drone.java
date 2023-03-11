@@ -35,7 +35,7 @@ public class Drone {
     private DroneState state;
 
     @OneToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinColumn(name = "order_number")
+    @JoinColumn(name = "order_id")
     private MedicationOrder medicationOrder;
 
 

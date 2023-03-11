@@ -26,7 +26,7 @@ public class MedicationOrder {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "medicationOrder",cascade = CascadeType.ALL)
     private List<Medication> medicationList ;
 
-    @Column(name = "source", columnDefinition = "VARCHAR(30) NOT NULL")
+    @Column(name = "source_location", columnDefinition = "VARCHAR(30) NOT NULL")
     private String source;
 
     @Column(name = "destination", columnDefinition = "VARCHAR(30) NOT NULL")
@@ -39,7 +39,7 @@ public class MedicationOrder {
     private double distanceKM;
 
     @OneToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinColumn(name = "drown_id")
+    @JoinColumn(name = "drone_serial")
     private Drone drone;
 
     public void addOrderMedication (Medication medication){
